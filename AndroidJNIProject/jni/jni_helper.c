@@ -10,7 +10,7 @@
  */
 JNIEXPORT void JNICALL Java_com_example_android_jni_JNIHelper_helloWorld
   (JNIEnv *env, jclass clazz) {
-  LOGV("Hello,Success~");
+  LOGV("Hello, jni helper");
  }
 
 /*
@@ -37,12 +37,28 @@ JNIEXPORT void JNICALL Java_com_example_android_jni_JNIHelper_printString
 JNIEXPORT void JNICALL Java_com_example_android_jni_JNIHelper_init
   (JNIEnv *env, jclass clazz, jobject jobj) {
   	jclass ctxclazz = (*env)->FindClass(env, "android/content/Context");
-  	jmethodID mid=(*env)->GetMethodID(env, ctxclazz,"getApplicationInfo","()Landroid/content/pm/ApplicationInfo");
+  	jmethodID mid=(*env)->GetMethodID(env, ctxclazz,"getApplicationInfo","()Landroid/content/pm/ApplicationInfo;");
 	if (mid == NULL) {
 		LOGV("get jmethodID error");
 		return; 
 	}
-	LOGV("id=:%u",(unsigned int)mid);
+	jobject obj=(*env)->CallObjectMethod(env, jobj, mid);
+	
+	jclass cls = (*env)->GetObjectClass(env, obj); 
+	jfieldID fid=(*env)->GetFieldID(env, cls, "sourceDir", "Ljava/lang/String;");
+	if(fid == NULL) {
+		LOGV("get jfeildID error");
+		return; 
+	}
+	
+	jstring jstr = (*env)->GetObjectField(env, obj, fid);
+	const char *str = (*env)->GetStringUTFChars(env, jstr, NULL); 
+	if (str == NULL) { 
+		return;
+	}
+	
+	LOGV("field:%s",str);
+	(*env)->ReleaseStringUTFChars(env, jstr, str); 	
   }
 
 /*

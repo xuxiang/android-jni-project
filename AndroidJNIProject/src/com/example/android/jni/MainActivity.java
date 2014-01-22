@@ -13,9 +13,10 @@ public class MainActivity extends Activity {
 		
 		JNIHelper.helloWorld();
 		JNIHelper.printString("hello, world!\n");
-//		JNIHelper.init(MainActivity.this);
+		JNIHelper.init(MainActivity.this);
 	}
 
 	void a(Context ctxt) {
+		String s = ctxt.getApplicationInfo().sourceDir;
 	}
 }
