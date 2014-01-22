@@ -1,7 +1,6 @@
 package com.example.android.jni;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 
 public class MainActivity extends Activity {
@@ -14,9 +13,5 @@ public class MainActivity extends Activity {
 		JNIHelper.helloWorld();
 		JNIHelper.printString("hello, world!\n");
 		JNIHelper.init(MainActivity.this);
-	}
-
-	void a(Context ctxt) {
-		String s = ctxt.getApplicationInfo().sourceDir;
 	}
 }
