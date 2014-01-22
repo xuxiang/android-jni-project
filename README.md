@@ -1,12 +1,14 @@
-1.Îª¹¤ÖÖÌí¼ÓjniÎÄ¼ş¼Ğ
+ï»¿1.ä¸ºå·¥ç§æ·»åŠ jniæ–‡ä»¶å¤¹
 
-2.Éú³ÉJNIHelperÍ·ÎÄ¼ş:
-cmd½øÈëbin\classesÄ¿Â¼ÏÂ,ÔËĞĞjavah com.example.android.jni.JNIHelper
-(Ç°ÌáÊÇ±£Ö¤ÀïÃæÓĞJNIHelper.classÎÄ¼ş´æÔÚ)
+2.ç”ŸæˆJNIHelperå¤´æ–‡ä»¶:
 
-3.½«bin\classesÄ¿Â¼ÏÂÉú³ÉµÄÍ·ÎÄ¼ş¼ş¿¼±¸µ½jniÎÄ¼ş¼ĞÏÂ.
-±àĞ´.c»ò.cppÎÄ¼ş,¼°MakefileÎÄ¼ş
+cmdè¿›å…¥bin\classesç›®å½•ä¸‹,è¿è¡Œjavah com.example.android.jni.JNIHelper
+(å‰ææ˜¯ä¿è¯é‡Œé¢æœ‰JNIHelper.classæ–‡ä»¶å­˜åœ¨)
 
-4.±àÒë
-°²×°ndkÄ¿Â¼,²¢µ¼³ö»·¾³±äÁ¿(r8ÒÔÉÏ°æ±¾ndk).
-»Øµ½¹¤ÖÖÄ¿Â¼ÏÂ(´Ë´¦ÎªAndroidJNIProject),Ö´ĞĞndk-build
+3.å°†bin\classesç›®å½•ä¸‹ç”Ÿæˆçš„å¤´æ–‡ä»¶ä»¶è€ƒå¤‡åˆ°jniæ–‡ä»¶å¤¹ä¸‹.
+ç¼–å†™.cæˆ–.cppæ–‡ä»¶,åŠMakefileæ–‡ä»¶
+
+
+4.ç¼–è¯‘
+å®‰è£…ndkç›®å½•,å¹¶å¯¼å‡ºç¯å¢ƒå˜é‡(r8ä»¥ä¸Šç‰ˆæœ¬ndk).
+å›åˆ°å·¥ç§ç›®å½•ä¸‹(æ­¤å¤„ä¸ºAndroidJNIProject),æ‰§è¡Œndk-build
