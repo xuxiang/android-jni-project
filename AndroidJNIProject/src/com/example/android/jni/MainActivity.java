@@ -12,8 +12,8 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		
 		JNIHelper.helloWorld();
-		JNIHelper.init(MainActivity.this);
 		JNIHelper.printString("hello, world!\n");
+//		JNIHelper.init(MainActivity.this);
 	}
 
 	void a(Context ctxt) {

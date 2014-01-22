@@ -4,13 +4,12 @@
 /* Header for class com_example_android_jni_JNIHelper */
 
 #define DEBUG 1
-
 #define LOG_TAG "JNI_HELPER"
-#define ALOGE(...) __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, __VA_ARGS__)
+
 #if DEBUG
-#define ALOGV(...) __android_log_print(ANDROID_LOG_VERBOSE, LOG_TAG, __VA_ARGS__)
+#define LOGV(...) __android_log_print(ANDROID_LOG_VERBOSE, LOG_TAG, __VA_ARGS__)
 #else
-#define ALOGV(...)
+#define LOGV(...)
 #endif
 
 #ifndef _Included_com_example_android_jni_JNIHelper

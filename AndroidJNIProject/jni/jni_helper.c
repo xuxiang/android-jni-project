@@ -10,7 +10,7 @@
  */
 JNIEXPORT void JNICALL Java_com_example_android_jni_JNIHelper_helloWorld
   (JNIEnv *env, jclass clazz) {
-  ALOGE("Hello,Success~");
+  LOGV("Hello,Success~");
  }
 
 /*
@@ -20,12 +20,11 @@ JNIEXPORT void JNICALL Java_com_example_android_jni_JNIHelper_helloWorld
  */
 JNIEXPORT void JNICALL Java_com_example_android_jni_JNIHelper_printString
   (JNIEnv *env, jclass clazz, jstring jmsg) {
-  	const char *str;
-  	str=(*env)->GetStringUTFChars(env, jmsg, NULL);;
+  	const char *str=(*env)->GetStringUTFChars(env, jmsg, NULL);;
   	if(str==NULL) {
   		return;
   	}  
-  	ALOGE("params:%s",str);
+  	LOGV("params:%s",str);
   	(*env)->ReleaseStringUTFChars(env, jmsg, str);    
  }
 
@@ -40,10 +39,10 @@ JNIEXPORT void JNICALL Java_com_example_android_jni_JNIHelper_init
   	jclass ctxclazz = (*env)->FindClass(env, "android/content/Context");
   	jmethodID mid=(*env)->GetMethodID(env, ctxclazz,"getApplicationInfo","()Landroid/content/pm/ApplicationInfo");
 	if (mid == NULL) {
-		ALOGE("get jmethodID error");*
+		LOGV("get jmethodID error");
 		return; 
 	}
-	ALOGE("id=:%u",(unsigned int)mid);
+	LOGV("id=:%u",(unsigned int)mid);
   }
 
 /*
