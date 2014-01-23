@@ -13,5 +13,6 @@ public class MainActivity extends Activity {
 		JNIHelper.helloWorld();
 		JNIHelper.printString("hello, world!\n");
 		JNIHelper.init(MainActivity.this);
+		System.out.println("enc:"+JNIHelper.encode("123456"));
 	}
 }

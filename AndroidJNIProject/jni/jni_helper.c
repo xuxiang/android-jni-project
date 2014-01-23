@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "jni_helper.h"
 
+static char *key="12514526234155261546254";
 
 /*
  * Class:     com_example_android_jni_JNIHelper
@@ -36,16 +37,15 @@ JNIEXPORT void JNICALL Java_com_example_android_jni_JNIHelper_printString
  */
 JNIEXPORT void JNICALL Java_com_example_android_jni_JNIHelper_init
   (JNIEnv *env, jclass clazz, jobject jobj) {
-  	jclass ctxclazz = (*env)->FindClass(env, "android/content/Context");
-  	jmethodID mid=(*env)->GetMethodID(env, ctxclazz,"getApplicationInfo","()Landroid/content/pm/ApplicationInfo;");
+	//jclass ctxclazz = (*env)->FindClass(env, "android/content/Context");
+  	jmethodID mid=(*env)->GetMethodID(env, (*env)->GetObjectClass(env, jobj),"getApplicationInfo","()Landroid/content/pm/ApplicationInfo;");
 	if (mid == NULL) {
 		LOGV("get jmethodID error");
 		return; 
 	}
 	jobject obj=(*env)->CallObjectMethod(env, jobj, mid);
 	
-	jclass cls = (*env)->GetObjectClass(env, obj); 
-	jfieldID fid=(*env)->GetFieldID(env, cls, "sourceDir", "Ljava/lang/String;");
+	jfieldID fid=(*env)->GetFieldID(env, (*env)->GetObjectClass(env, obj), "packageName", "Ljava/lang/String;");
 	if(fid == NULL) {
 		LOGV("get jfeildID error");
 		return; 
@@ -59,14 +59,34 @@ JNIEXPORT void JNICALL Java_com_example_android_jni_JNIHelper_init
 	
 	LOGV("field:%s",str);
 	(*env)->ReleaseStringUTFChars(env, jstr, str); 	
-  }
+}
 
 /*
  * Class:     com_example_android_jni_JNIHelper
- * Method:    transcomand
- * Signature: ([B)V
+ * Method:    encode
+ * Signature: (Ljava/lang/String;)Ljava/lang/String;
  */
-JNIEXPORT void JNICALL Java_com_example_android_jni_JNIHelper_transcomand
-  (JNIEnv *env, jclass clazz, jbyteArray jdata){
-  
+JNIEXPORT jstring JNICALL Java_com_example_android_jni_JNIHelper_encode
+  (JNIEnv *env, jclass clazz, jstring jstr){
+	jstr jkey =(*env)->NewStringUTF(env, key);  
+	jmethodID mid=(*env)->GetStaticMethodID(env, clazz, "encryptMD5","(Ljava/lang/String;)Ljava/lang/String;");
+	
+	jstring retStr=(*env)->CallStaticObjectMethod(env, clazz, mid, jstr);
+	jstring temp=retStr;
+	int i=0;
+	for(i=0;i<10;i++) {
+		retStr=(*env)->CallStaticObjectMethod(env, clazz, mid, temp);
+		temp=retStr;
+	}
+	
+  	const char *str = (*env)->GetStringUTFChars(env, retStr, NULL); 
+	if (str == NULL) { 
+		return NULL;
+	}
+	LOGV("output:%s",str);
+	(*env)->ReleaseStringUTFChars(env, retStr, str); 
+	
+	return retStr;
  }
+
+ 

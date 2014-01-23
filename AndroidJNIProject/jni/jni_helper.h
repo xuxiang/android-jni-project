@@ -35,11 +35,11 @@ JNIEXPORT void JNICALL Java_com_example_android_jni_JNIHelper_init
 
 /*
  * Class:     com_example_android_jni_JNIHelper
- * Method:    transcomand
- * Signature: ([B)V
+ * Method:    encode
+ * Signature: (Ljava/lang/String;)Ljava/lang/String;
  */
-JNIEXPORT void JNICALL Java_com_example_android_jni_JNIHelper_transcomand
-  (JNIEnv *, jclass, jbyteArray);
+JNIEXPORT jstring JNICALL Java_com_example_android_jni_JNIHelper_encode
+  (JNIEnv *, jclass, jstring);
 
 /*
  * Class:     com_example_android_jni_JNIHelper
