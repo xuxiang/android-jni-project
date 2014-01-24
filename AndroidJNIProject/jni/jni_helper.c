@@ -68,25 +68,35 @@ JNIEXPORT void JNICALL Java_com_example_android_jni_JNIHelper_init
  */
 JNIEXPORT jstring JNICALL Java_com_example_android_jni_JNIHelper_encode
   (JNIEnv *env, jclass clazz, jstring jstr){
-	jstr jkey =(*env)->NewStringUTF(env, key);  
-	jmethodID mid=(*env)->GetStaticMethodID(env, clazz, "encryptMD5","(Ljava/lang/String;)Ljava/lang/String;");
+	jmethodID mid=NULL;
+	jstring outputjstr=NULL;
+	jstring tempjstr=NULL;
 	
-	jstring retStr=(*env)->CallStaticObjectMethod(env, clazz, mid, jstr);
-	jstring temp=retStr;
+	mid=(*env)->GetStaticMethodID(env, clazz, "encryptMD5","(Ljava/lang/String;)Ljava/lang/String;");
+	tempjstr=jstr;
 	int i=0;
 	for(i=0;i<10;i++) {
-		retStr=(*env)->CallStaticObjectMethod(env, clazz, mid, temp);
-		temp=retStr;
+		outputjstr=(*env)->CallStaticObjectMethod(env, clazz, mid, tempjstr);
+		tempjstr=combine(env, outputjstr, key);
 	}
+
+	const char *outputstr= (*env)->GetStringUTFChars(env, outputjstr, NULL); 
+	LOGV("output:%s",outputstr);
+	(*env)->ReleaseStringUTFChars(env, outputjstr, outputstr); 
 	
-  	const char *str = (*env)->GetStringUTFChars(env, retStr, NULL); 
-	if (str == NULL) { 
-		return NULL;
-	}
-	LOGV("output:%s",str);
-	(*env)->ReleaseStringUTFChars(env, retStr, str); 
-	
-	return retStr;
+	return outputjstr;
  }
+ 
+ jstring combine(const JNIEnv *env, const jstring jstr, const char *k) {
+	const char *buffer=(char *)malloc(64);
+	const char *str = (char *)(*env)->GetStringUTFChars(env, jstr, NULL); 
+	
+	strcpy(buffer, str);
+    strcat(buffer, k); 
+	(*env)->ReleaseStringUTFChars(env, jstr, str); 
+	
+	return (*env)->NewStringUTF(env, buffer);
+ }
+
 
  

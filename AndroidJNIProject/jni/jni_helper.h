@@ -17,6 +17,8 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+jstring combine(const JNIEnv *, const jstring, const char *);
 /*
  * Class:     com_example_android_jni_JNIHelper
  * Method:    helloWorld
